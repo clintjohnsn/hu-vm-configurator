@@ -1,5 +1,5 @@
 .App {
-  text-align: center;
+  text-align: left;
 }
 
 .App-logo {
@@ -35,4 +35,39 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.mainView{
+  width:900px;
+}
+.costView{
+  width:300px;
+}
+h1{
+  text-align: center;
+}
+.header{
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+}
+
+.greyBox{
+  margin: 20px;
+  height: 80px;
+  width: 80px;
+  background-color: lightgray;
+}
+
+.cardFlexBox{
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-around;
+}
+.imageDesc{
+  width: 600px;
+}
+
+.imageSelection{
+  width: 120px;
 }
