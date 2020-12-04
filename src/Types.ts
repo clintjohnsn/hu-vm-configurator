@@ -18,10 +18,9 @@ export type StateType ={
     imageId:number|null,
     imageVariation:string|null,
     region:string|null,
-    cost:number,
 }
 
 export type setFunctionType = {
     setImageDetails:(id:number, variation:string)=>void,
-    setRegion:(region:string)=>void
+    setRegion:(region:string)=>void,
 }

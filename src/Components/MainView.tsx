@@ -35,10 +35,10 @@ const MainView:React.FC<Props> = ({data,state,setFunctions})=>{
                     </select>
                 </div>
                 <Grid container>
-                    <Button variant="contained" color="primary">1.Choose Image</Button>
-                    {/* <button>2.Choose Instance Type</button>
-                    <button>3.Choose Storage and Network</button>
-                    <button>4.Configure Security</button> */}
+                    <Button variant="contained" color="primary" >1.Choose Image</Button>
+                    {/* <Button>2.Choose Instance Type</Button>
+                    <Button>3.Choose Storage & Network</Button>
+                    <Button>4.Configure Security</Button> */}
                     <Button variant="contained" color="primary">5.Review & Launch </Button>
                 </Grid>
             </div>

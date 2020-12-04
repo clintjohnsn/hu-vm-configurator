@@ -71,3 +71,7 @@ h1{
 .imageSelection{
   width: 120px;
 }
+
+.cost{
+  text-align: right;
+}

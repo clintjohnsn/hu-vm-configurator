@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import MainView from './Components/MainView';
 import CostView from './Components/CostView'
 import { Container, Grid } from '@material-ui/core';
@@ -11,33 +11,52 @@ const MainContainer:React.FC = ()=>{
         imageId:null,
         imageVariation:null,
         region:'us-east-1',
-        cost:0
     });
 
-    const calculateCost = (state:StateType)=>{
-        let cost:number = 0;
-        if (state.imageId !== null){
-            mockData.images.forEach(image => {
-                if (image.id === state.imageId){
-                    cost+=image.cost;
-                }
-            });
-        }
-        return cost;
-    }
-
     const setFunctions = {
-
         setImageDetails:(id:number, variation:string)=>{
-            setState({...state,imageId:id,imageVariation:variation,cost:calculateCost(state)});
+            setState({...state,imageId:id,imageVariation:variation});
         },
         setRegion:(region:string)=>{
             setState({...state,region:region});
         },
-
     }
 
+    let [cost,setCost] = useState(0);
+
+    const calculateCost = ()=>{
+        let newCost:number = 0;
+        if (state.imageId !== null){
+            mockData.images.forEach(image => {
+                if (image.id === state.imageId){
+                    newCost+=image.cost;
+                }
+            });
+        }
+        setCost(newCost);
+    }
+
+    const validateState= ()=>{
+        mockData.images.forEach(image=>{
+            if (image.id == state.imageId){
+                if(!image.region.some(region=>{
+                    return region === state.region;
+                })){
+                    setState({...state,imageId:null})
+                    alert(`${image.name} is not available for the selected region`);
+                }
+            }
+        })
+    }
+
+    useMemo(() => {
+        calculateCost();
+        validateState()
+     }, [state]);
+
+
     console.log(state)
+    console.log(cost)
     
     return (
         <div>
@@ -45,7 +64,7 @@ const MainContainer:React.FC = ()=>{
             <Container maxWidth="lg">
                 <Grid container>
                     <MainView data={mockData} state={state} setFunctions={setFunctions}/>
-                    <CostView/>
+                    <CostView data={mockData} state={state} cost={cost}/>
                 </Grid>
             </Container>
             
