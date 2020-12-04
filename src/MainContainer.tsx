@@ -49,7 +49,7 @@ const MainContainer:React.FC = ()=>{
         })
     }
 
-    useMemo(() => {
+    useEffect(() => {
         calculateCost();
         validateState()
      }, [state]);
