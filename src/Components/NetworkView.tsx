@@ -3,6 +3,7 @@ import { stat } from 'fs';
 import React from 'react';
 import { MockDataType, setFunctionType, StateType } from '../Types';
 import { getMemoryFormat } from '../Utility';
+
 type Props = {
     data:MockDataType,
     state:StateType,
@@ -19,7 +20,10 @@ const NetworkView:React.FC<Props>=({data,state,setFunctions})=>{
             <p>Outbound Traffic</p> 
             <Grid container>
                 {getMemoryFormat(min)}
-                <input type="range" min={min.toString()} max={max.toString()} onChange={(e)=>{
+                <input type="range" min={min.toString()} max={max.toString()}
+                value={state.bandwidth?state.bandwidth:undefined} 
+                defaultValue={512}
+                onChange={(e)=>{
                     setFunctions.setBandwidth(parseInt(e.target.value));
                 }}/>
                 {getMemoryFormat(max)}

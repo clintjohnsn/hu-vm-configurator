@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export type ImageType ={
     id:number,
     name:string,
@@ -17,10 +15,19 @@ export type InstanceType = {
     cpu:{val:string,cost:number}[],
 }
 
+export type StorageType = {
+    id:number,
+    name:string,
+    minCapacity:number,
+    maxCapacity:number,
+    cost:number,
+}
+
 export type MockDataType ={
     regions:string[],
     images:ImageType[],
     instances:InstanceType[],
+    storage:StorageType[],
 }
 
 export type SelectedInstanceType ={
@@ -29,12 +36,26 @@ export type SelectedInstanceType ={
     cpuVariant?:string, 
 }
 
+export type SelectedStorageType = {
+    id:number,
+    typeId:number,
+    capacity:number,
+    encryption:boolean,
+    backupRequired:boolean,
+    remarks:string,
+}
+
 export type StateType ={
     imageId:number|null,
     imageVariation:string|null,
     region:string|null,
     instance:SelectedInstanceType|null,
     bandwidth:number|null,
+    storage:{
+        root:SelectedStorageType,
+        ext:SelectedStorageType[]
+    },
+    
 }
 
 export type setFunctionType = {
@@ -42,5 +63,8 @@ export type setFunctionType = {
     setRegion:(region:string)=>void,
     setInstance:(instance:SelectedInstanceType)=>void,
     setBandwidth:(bandwidth:number)=>void,
-    
+    addExtStorage:()=>void,
+    deleteExtStorage:(id:number)=>void,
+    setStorage:(volume:string, storage:SelectedStorageType)=>void,
+
 }

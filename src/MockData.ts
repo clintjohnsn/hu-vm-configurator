@@ -116,7 +116,23 @@ const mockData = {
                 {val:"16 Core",cost:40},   
             ],
         },
-    ]
+    ],
+    storage:[
+            {
+                id:1,
+                name:"SSD",
+                minCapacity:20,
+                maxCapacity:512,
+                cost:40,
+            },
+            {
+                id:2,
+                name:"Magnetic Disk",
+                minCapacity:40,
+                maxCapacity:2048,
+                cost:20,
+            }
+        ]
 }
 
 

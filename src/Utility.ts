@@ -16,3 +16,9 @@ export const getMemoryFormat = (memory:number)=>{
         return (memory/1024).toFixed(1) + " TB";
     }
 } 
+
+export const getIopsFromCapacity= (capacity:number) =>{
+    if (capacity < 100) return 100;
+    if (capacity >=100 && capacity <=500) return 600;
+    if (capacity >500 ) return 1000;
+}

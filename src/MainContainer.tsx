@@ -3,7 +3,7 @@ import MainView from './Components/MainView';
 import CostView from './Components/CostView'
 import { Container, Grid } from '@material-ui/core';
 import mockData from './MockData'
-import { InstanceType, SelectedInstanceType, StateType } from './Types';
+import { InstanceType, SelectedInstanceType, SelectedStorageType, StateType } from './Types';
 import { calculateBandwidthCost } from './Utility';
 
 
@@ -13,15 +13,47 @@ const MainContainer:React.FC = ()=>{
         imageId:null,
         imageVariation:null,
         region:'us-east-1',
-        // instance:{
-        //     instanceId:1,
-        //     cpuVariant:"1 Core",
-        //     memoryVariant:"256 MB",
-        // },
         instance:null,
         bandwidth:null,
-
+        storage:{
+            root:{
+                id:0,
+                typeId:1,
+                capacity:100,
+                encryption:true,
+                backupRequired:true,
+                remarks:"",
+            },
+            ext:[]
+        },
     });
+
+    const addExtStorage = ()=>{
+        let s = {
+            id:Date.now(),
+            typeId:1,
+            capacity:100,
+            encryption:true,
+            backupRequired:true,
+            remarks:"",
+        }
+        setState({...state,
+            storage:{...state.storage,
+                ext:[...state.storage.ext,s]
+            }
+        });
+    }
+
+    const deleteExtStorage = (id:number)=>{
+        let index = state.storage.ext.findIndex(i=>i.id === id);
+        let newExtArray = [...state.storage.ext];
+        newExtArray.splice(index,1);
+        setState({...state,
+            storage:{...state.storage,
+                ext:newExtArray
+            }
+        });
+    }
 
     const setFunctions = {
         setImageDetails:(id:number, variation:string)=>{
@@ -35,6 +67,22 @@ const MainContainer:React.FC = ()=>{
         },
         setBandwidth:(bandwidth:number) =>{
             setState({...state,bandwidth:bandwidth});
+        },
+        addExtStorage:addExtStorage,
+        deleteExtStorage:deleteExtStorage,
+        setStorage:(volume:string, storage:SelectedStorageType)=>{
+            if (volume === 'Root'){
+                setState({...state,storage:{...state.storage,root:storage}});
+            }else{
+                let newExtList = [...state.storage.ext]
+                newExtList = newExtList.map(s=>{
+                    if(s.id === storage.id){
+                        return storage;
+                    }
+                    return s;
+                });
+                setState({...state,storage:{...state.storage,ext:newExtList}})
+            }
         }
     }
 
@@ -65,9 +113,17 @@ const MainContainer:React.FC = ()=>{
                 }
             });
         }
+
         if(state.bandwidth!==null){
             newCost+=calculateBandwidthCost(state.bandwidth);
         }
+
+        if(state.storage.ext.length!==0){
+            mockData.storage.forEach(storageType =>{
+                newCost+= state.storage.ext.filter(s=>s.typeId === storageType.id).length * storageType.cost;
+            })
+        }
+
         setCost(newCost);
     }
 
