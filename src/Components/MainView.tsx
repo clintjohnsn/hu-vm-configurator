@@ -2,8 +2,10 @@ import { Grid,Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import mockData from '../MockData';
 import { MockDataType, setFunctionType, StateType } from '../Types';
-import ImageList from './ImageList';
-import Summary from './Summary';
+import ImageListView from './ImageListView';
+import InstanceView from './InstanceView';
+import StorageView from './StorageView';
+import SummaryView from './SummaryView';
 
 type Props ={
     data:MockDataType,
@@ -12,6 +14,8 @@ type Props ={
 }
 
 const MainView:React.FC<Props> = ({data,state,setFunctions})=>{
+
+    let [page,setPage]=useState(1);
     const regionList = data.regions.map(region=>{
         return(
         <option value={region} key={region}>
@@ -20,28 +24,36 @@ const MainView:React.FC<Props> = ({data,state,setFunctions})=>{
         )
     });
 
-    const [page,setPage]=useState(1);
-
+    
+    let tabsList = ['Choose Image','Choose Instance Type','Choose Storage & Network','Configure Security','Review & Launch']
+    let renderTabsList = tabsList.map((tabName,index)=>{
+        const variant = index+1===page?"primary":"default";
+        return <Button key={index} variant="contained" color={variant} onClick={()=>setPage(index+1)}>
+                    {`${index+1}.`}{tabName}
+                </Button>
+    })
     return (
         <div className="mainView">
             <div>
                 <div className='header'>
-                    <h2>Choose Image</h2>
+                    <h2>{tabsList[page-1]}</h2>
                     <select name="regions" onChange={(e)=>{setFunctions.setRegion(e.target.value)}}>
                         {regionList}
                     </select>
                 </div>
                 <Grid container>
-                    <Button variant="contained" color="primary" onClick={()=>setPage(1)}>1.Choose Image</Button>
-                    {/* <Button>2.Choose Instance Type</Button>
-                    <Button>3.Choose Storage & Network</Button>
-                    <Button>4.Configure Security</Button> */}
-                    <Button variant="contained" color="primary" onClick={()=>setPage(2)}>5.Review & Launch </Button>
+                   {renderTabsList}
                 </Grid>
             </div>
             <div className="mainContent">
-                {page===1?<ImageList data={mockData} state={state} setFunctions={setFunctions}/>:null}
-                {page===2?<Summary data={mockData} state={state} setFunctions={setFunctions}/>:null}
+                {page===1?<ImageListView data={mockData} state={state} setFunctions={setFunctions}/>:null}
+                {page===2?<InstanceView data={mockData} state={state} setFunctions={setFunctions}/>:null}
+                {page===3?<StorageView data={mockData} state={state} setFunctions={setFunctions}/>:null}
+                {page===5?<SummaryView data={mockData} state={state} setFunctions={setFunctions}/>:null}
+            </div>
+            <div className="footer">
+                {page!==1?<Button onClick={()=>setPage(page-1)}>Back</Button>:null}
+                <Button onClick={()=>setPage(page!==5?page+1:5)}>Proceed</Button>
             </div>
         </div>
     );

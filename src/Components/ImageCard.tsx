@@ -10,10 +10,18 @@ type Props = {
 
 const ImageCard:React.FC<Props> =({image,state,setFunctions})=>{
     let [selectedVariation,setSelectedVariation] = useState('');
+    let checked =false;
+    let selected = image.id == state.imageId?"selected":"";
+
     let imageVariations = image.variations.map(s=>{
+            if(image.id === state.imageId){
+                // if(s=== state.imageVariation){
+                    checked=true;
+                // }
+            }
             return(
                 <div key={s} onClick={()=>{setSelectedVariation(s)}}>
-                    <input type="radio" id={image.id+s} name={image.id.toString()} value={s} />
+                    <input type="radio" id={image.id+s} name={image.id.toString()} value={s} defaultChecked={checked}/>
                     <label htmlFor={image.id+s}>{s}</label><br/>
                 </div>   
             );
@@ -21,10 +29,9 @@ const ImageCard:React.FC<Props> =({image,state,setFunctions})=>{
 
 
     return(
-        <div>
+        <div >
             <Card>
-                
-                <CardContent>
+                <CardContent className={selected}>
                     <div className="cardFlexBox">
                         <div className="greyBox"></div>
                         

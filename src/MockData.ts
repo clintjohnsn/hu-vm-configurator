@@ -44,6 +44,78 @@ const mockData = {
             cost: 200.22,
             region:["us-east-1", "us-east-2", "us-west-1", "india-1"],
         },
+    ],
+    instances:[
+        {
+            id:1,
+            name:"gp",
+            desc:"General Purpose",
+            memory:[
+                {val:"256 MB",cost:0},
+                {val:"512 MB", cost:0},
+                {val:"1 GB", cost:0},
+                {val:"2 GB",cost:0},
+                {val:"4 GB", cost:0},
+            ],
+            cpu:[
+                {val:"1 Core",cost:0},
+                {val:"2 Core",cost:0},
+                {val:"4 Core",cost:0},   
+            ],
+        },
+        {
+            id:2,
+            name:"strg",
+            desc:"Storage Optimized",
+            memory:[
+                {val:"16 GB", cost:0},
+                {val:"32 GB",cost:20},
+                {val:"64 GB", cost:40},
+            ],
+            cpu:[
+                {val:"1 Core",cost:0},
+                {val:"8 Core",cost:20},
+                {val:"16 Core",cost:40},   
+            ],
+        },
+        {
+            id:3,
+            name:"nwrk",
+            desc:"Network Optimized",
+            memory:[
+                {val:"256 MB",cost:0},
+                {val:"512 MB", cost:0},
+                {val:"1 GB", cost:0},
+                {val:"2 GB",cost:0},
+                {val:"4 GB", cost:0},
+                {val:"16 GB", cost:0},
+                {val:"32 GB",cost:20},
+                {val:"64 GB", cost:40},
+            ],
+            cpu:[
+                {val:"1 Core",cost:0},
+                {val:"2 Core",cost:0},
+                {val:"4 Core",cost:0},
+                {val:"8 Core",cost:20},
+                {val:"16 Core",cost:40},   
+            ],
+        },
+        {
+            id:4,
+            name:"cmpt",
+            desc:"Compute Optimized",
+            memory:[
+                {val:"16 GB", cost:0},
+                {val:"32 GB",cost:20},
+                {val:"64 GB", cost:40},
+            ],
+            cpu:[
+                {val:"1 Core",cost:0},
+                {val:"2 Core",cost:0},
+                {val:"8 Core",cost:20},
+                {val:"16 Core",cost:40},   
+            ],
+        },
     ]
 }
 
