@@ -32,7 +32,16 @@ const StorageCard: React.FC<Props> = ({
   let capacityRange = storage.typeId === 1 ? "20-512 GB" : "40-2048 GB";
   return (
     <div className="storageCard">
-      <Paper elevation={3}>
+      {volume !== "Root" ? (
+        <p
+          onClick={() => setFunctions.deleteExtStorage(id ? id : -1)}
+          className="closeButton"
+        >
+          {" "}
+          X
+        </p>
+      ) : null}
+      <Paper elevation={7}>
         <div className="cardFlexBox">
           <div>
             <h5>Type</h5>

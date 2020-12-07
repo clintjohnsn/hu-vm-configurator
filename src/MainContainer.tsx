@@ -316,6 +316,7 @@ const MainContainer: React.FC = () => {
     },
   });
 
+  console.log(state);
   return (
     <div>
       <GlobalCss />
