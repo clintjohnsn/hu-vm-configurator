@@ -15,9 +15,16 @@ type Props = {
   state: StateType;
   setFunctions: setFunctionType;
   cost: number;
+  setPage: (page: number) => void;
 };
 
-const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
+const Summary: React.FC<Props> = ({
+  data,
+  state,
+  setFunctions,
+  cost,
+  setPage,
+}) => {
   let summaryData: SummaryType = {};
 
   let image = data.images.find((image) => image.id === state.imageId);
@@ -81,8 +88,17 @@ const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
             Generate JSON
           </Button>
         </div>
+        <div style={{ height: "3em" }}></div>
         {image ? (
           <div>
+            <Button
+              onClick={() => setPage(1)}
+              variant="text"
+              color="primary"
+              className="editButton"
+            >
+              EDIT
+            </Button>
             <h2>Image</h2>
             <ImageCard
               image={image}
@@ -93,6 +109,14 @@ const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
         ) : null}
         {summaryData.instance.name ? (
           <div>
+            <Button
+              onClick={() => setPage(2)}
+              variant="text"
+              color="primary"
+              className="editButton"
+            >
+              EDIT
+            </Button>
             <h2>Instance</h2>
             <Card>
               <CardContent>
@@ -105,6 +129,14 @@ const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
         ) : null}
         {summaryData.bandwidth ? (
           <div>
+            <Button
+              onClick={() => setPage(3)}
+              variant="text"
+              color="primary"
+              className="editButton"
+            >
+              EDIT
+            </Button>
             <h2>Bandwidth</h2>
             <Card>
               <CardContent>
@@ -114,6 +146,14 @@ const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
           </div>
         ) : null}
         <div>
+          <Button
+            onClick={() => setPage(3)}
+            variant="text"
+            color="primary"
+            className="editButton"
+          >
+            EDIT
+          </Button>
           <h2>Storage</h2>
           <StorageCard
             volume="Root"

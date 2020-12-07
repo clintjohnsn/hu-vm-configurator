@@ -4,15 +4,7 @@ import CostView from "./Components/CostView";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import { calculateBandwidthCost, getMemoryFormat } from "./Utility";
 import mockData from "./MockData";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Container,
-  Grid,
-  Paper,
-  withStyles,
-} from "@material-ui/core";
+import { Container, Grid, Paper, withStyles } from "@material-ui/core";
 import {
   InstanceType,
   SelectedInstanceType,

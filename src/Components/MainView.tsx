@@ -101,6 +101,7 @@ const MainView: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
             state={state}
             setFunctions={setFunctions}
             cost={cost}
+            setPage={setPage}
           />
         ) : null}
       </div>

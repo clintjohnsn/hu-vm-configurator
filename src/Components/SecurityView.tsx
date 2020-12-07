@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { MockDataType, setFunctionType, StateType } from "../Types";
 
 type Props = {

@@ -1,12 +1,5 @@
 import * as React from "react";
-import {
-  cleanup,
-  fireEvent,
-  getByAltText,
-  getByText,
-  render,
-  wait,
-} from "@testing-library/react";
+import { cleanup, render } from "@testing-library/react";
 import MainContainer from "../MainContainer";
 
 afterEach(cleanup);
