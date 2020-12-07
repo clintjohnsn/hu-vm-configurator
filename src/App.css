@@ -1,5 +1,12 @@
 .App {
   text-align: left;
+  /* font-weight: 300; */
+}
+body {
+  background-color: rgb(244, 245, 248);
+}
+* {
+  font-family: Montserrat !important;
 }
 
 .App-logo {
@@ -37,44 +44,121 @@
   }
 }
 
-.mainView{
-  width:900px;
+.title {
+  text-align: center;
+  font-weight: 1000;
+  /* padding: 0; */
+  margin: 0;
 }
-.costView{
-  width:300px;
+
+.mainView {
+  width: 900px;
+  margin-top: 2em;
 }
-h1{
+.costView {
+  width: 300px;
+  margin-left: 2em;
+  margin-top: 6em;
+}
+h1 {
   text-align: center;
 }
-.header{
+.header {
   display: flex;
   /* flex-direction: row; */
   justify-content: space-between;
 }
 
-.greyBox{
+.greyBox {
   margin: 20px;
   height: 80px;
   width: 80px;
   background-color: lightgray;
 }
 
-.cardFlexBox{
+.cardFlexBox {
   display: flex;
   justify-content: space-around;
+  height: 6.5em;
+  margin-left: 0.4em;
+  margin-right: 0.4em;
 }
-.imageDesc{
+.imageDesc {
   width: 600px;
 }
 
-.imageSelection{
+.imageSelection {
   width: 120px;
+  margin-top: 1em;
+  /* margin-bottom: 3em; */
 }
 
-.cost{
+.cost {
   text-align: right;
 }
 
-.selected{
-  background-color: lightgray;
+.selected {
+  background-color: rgb(3, 125, 252, 0.1);
+}
+.imageCardWrapper {
+  margin: 1em;
+  margin-top: 2em;
+}
+
+.tabsButtons {
+  margin-top: 0.5em;
+}
+
+.tabButtonWrapper {
+  margin: 0.2em;
+}
+
+.mainList {
+  max-height: 500;
+  overflow: auto;
+}
+
+p {
+  font-size: 0.8em;
+  font-weight: 600;
+}
+label {
+  font-size: 0.8em;
+  font-weight: 600;
+}
+
+select {
+  height: 10;
+  color: rgb(3, 125, 252);
+  min-width: 8em;
+  max-height: 2.5em;
+  min-height: 2em;
+}
+
+select:active,
+select:hover {
+  outline-color: rgb(3, 125, 252);
+}
+
+.storageSelect {
+  min-height: 1.8em;
+}
+
+.storageCard {
+  margin-top: 1.5em;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.instanceConfigOptions {
+  margin-top: 2em;
+}
+
+.instanceConfigOptions p {
+  margin-right: 3em;
+  margin-left: 1em;
+}
+
+.instanceTypeWrapper {
+  margin-top: 3em;
 }
