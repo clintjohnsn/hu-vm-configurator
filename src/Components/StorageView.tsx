@@ -34,7 +34,8 @@ const StorageView: React.FC<Props> = ({ data, state, setFunctions }) => {
       {renderExtStorageList}
       <Button
         className="addVolumeButton"
-        variant="outlined"
+        color="default"
+        variant="contained"
         onClick={() => setFunctions.addExtStorage()}
       >
         {" "}

@@ -13,11 +13,12 @@ const InstanceView: React.FC<Props> = ({ data, state, setFunctions }) => {
 
   let instanceButtons = data.instances.map((instance) => {
     const instanceButtonVariant =
-      state.instance?.instanceId === instance.id ? "outlined" : "text";
+      state.instance?.instanceId === instance.id ? "primary" : "secondary";
     return (
-      <div key={instance.id}>
+      <div className="buttonsWrapper" key={instance.id}>
         <Button
-          variant={instanceButtonVariant}
+          variant="contained"
+          color={instanceButtonVariant}
           onClick={() => {
             setFunctions.setInstance({
               ...state.instance,

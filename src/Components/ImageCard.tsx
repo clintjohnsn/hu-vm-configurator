@@ -54,20 +54,22 @@ const ImageCard: React.FC<Props> = ({ image, state, setFunctions }) => {
               ) : (
                 imageVariations
               )}
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  setFunctions.setImageDetails(
-                    image.id,
-                    selectedVariation.length !== 0
-                      ? selectedVariation
-                      : image.variations[0]
-                  );
-                }}
-              >
-                Select
-              </Button>
+              <div className="selectImageButtonWrapper">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    setFunctions.setImageDetails(
+                      image.id,
+                      selectedVariation.length !== 0
+                        ? selectedVariation
+                        : image.variations[0]
+                    );
+                  }}
+                >
+                  Select
+                </Button>
+              </div>
             </div>
           </div>
         </CardContent>

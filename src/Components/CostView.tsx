@@ -37,7 +37,8 @@ const CostView: React.FC<Props> = ({ data, state, cost }) => {
     if (count > 0) {
       return (
         <p key={storageVariant.id}>
-          Ext {storageVariant.name} ({count}) - ${cost}
+          Ext {storageVariant.name} ({count})
+          <span className="costValues">${cost}</span>
         </p>
       );
     }
@@ -54,27 +55,31 @@ const CostView: React.FC<Props> = ({ data, state, cost }) => {
         <CardContent>
           {selectedImage ? (
             <p>
-              {selectedImage.name} - ${selectedImage.cost}
+              {selectedImage.name}
+              <span className="costValues">${selectedImage.cost}</span>
             </p>
           ) : null}
           <div>
             {state.instance?.cpuVariant ? (
               <p>
-                CPU - {state.instance.cpuVariant} - ${selectedCpuVariantCost}
+                CPU - {state.instance.cpuVariant}
+                <span className="costValues">${selectedCpuVariantCost}</span>
               </p>
             ) : null}
             {state.instance?.memoryVariant ? (
               <p>
-                Memory - {state.instance.memoryVariant} - $
-                {selectedMemoryVariantCost}
+                Memory - {state.instance.memoryVariant}
+                <span className="costValues">${selectedMemoryVariantCost}</span>
               </p>
             ) : null}
             {state.storage.ext.length !== 0 ? renderExtStorageDetails : null}
 
             {state.bandwidth ? (
               <p>
-                Network Bandwidth - {getMemoryFormat(state.bandwidth)} - $
-                {calculateBandwidthCost(state.bandwidth)}
+                Network Bandwidth - {getMemoryFormat(state.bandwidth)}
+                <span className="costValues">
+                  ${calculateBandwidthCost(state.bandwidth)}
+                </span>
               </p>
             ) : null}
           </div>

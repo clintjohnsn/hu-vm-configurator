@@ -162,3 +162,44 @@ select:hover {
 .instanceTypeWrapper {
   margin-top: 3em;
 }
+.costValues {
+  float: right;
+}
+
+.selectImageButtonWrapper {
+  margin-top: 1em;
+}
+
+.exportButton {
+  float: right;
+  margin-right: 2em;
+  margin-top: 1em;
+}
+.footer {
+  margin-top: 1em;
+}
+
+.buttonsWrapper {
+  /* margin-left: 1em; */
+  margin-right: 1em;
+}
+
+.footer {
+  display: flex;
+}
+
+.backButton {
+  background-color: #555555;
+}
+
+button {
+  border: none;
+  color: white;
+  padding: 0.8em 2em;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8em;
+  /* margin: 4px 2px; */
+  /* cursor: pointer; */
+}

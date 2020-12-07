@@ -4,6 +4,7 @@ import mockData from "../MockData";
 import { MockDataType, setFunctionType, StateType } from "../Types";
 import ImageListView from "./ImageListView";
 import InstanceView from "./InstanceView";
+import SecurityView from "./SecurityView";
 import StorageView from "./StorageView";
 import SummaryView from "./SummaryView";
 
@@ -32,7 +33,7 @@ const MainView: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
     "Review & Launch",
   ];
   let renderTabsList = tabsList.map((tabName, index) => {
-    const variant = index + 1 === page ? "primary" : "default";
+    const variant = index + 1 === page ? "primary" : "secondary";
     return (
       <div className="tabButtonWrapper">
         <Button
@@ -87,6 +88,13 @@ const MainView: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
             setFunctions={setFunctions}
           />
         ) : null}
+        {page === 4 ? (
+          <SecurityView
+            data={mockData}
+            state={state}
+            setFunctions={setFunctions}
+          />
+        ) : null}
         {page === 5 ? (
           <SummaryView
             data={mockData}
@@ -98,11 +106,28 @@ const MainView: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
       </div>
       <div className="footer">
         {page !== 1 ? (
-          <Button onClick={() => setPage(page - 1)}>Back</Button>
+          <div className="buttonsWrapper">
+            <Button
+              style={{ backgroundColor: "black" }}
+              className="footerButtons"
+              variant="contained"
+              color="primary"
+              onClick={() => setPage(page - 1)}
+            >
+              Back
+            </Button>
+          </div>
         ) : null}
-        <Button onClick={() => setPage(page !== 5 ? page + 1 : 5)}>
-          Proceed
-        </Button>
+        <div className="buttonsWrapper">
+          <Button
+            className="footerButtons"
+            color="primary"
+            variant="contained"
+            onClick={() => setPage(page !== 5 ? page + 1 : 5)}
+          >
+            Proceed
+          </Button>
+        </div>
       </div>
     </div>
   );

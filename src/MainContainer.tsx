@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import MainView from "./Components/MainView";
 import CostView from "./Components/CostView";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import { calculateBandwidthCost, getMemoryFormat } from "./Utility";
+import mockData from "./MockData";
 import {
   Card,
   CardContent,
@@ -10,14 +13,12 @@ import {
   Paper,
   withStyles,
 } from "@material-ui/core";
-import mockData from "./MockData";
 import {
   InstanceType,
   SelectedInstanceType,
   SelectedStorageType,
   StateType,
 } from "./Types";
-import { calculateBandwidthCost, getMemoryFormat } from "./Utility";
 
 const MainContainer: React.FC = () => {
   let [state, setState] = useState<StateType>({
@@ -304,23 +305,36 @@ const MainContainer: React.FC = () => {
     },
   })(() => null);
 
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "rgb(3, 125, 252)",
+      },
+      secondary: {
+        main: "rgb(255,255,255)",
+      },
+    },
+  });
+
   return (
     <div>
       <GlobalCss />
-      <Paper elevation={8}>
-        <h1 className="title">HVC</h1>
-      </Paper>
-      <Container>
-        <Grid container>
-          <MainView
-            data={mockData}
-            state={state}
-            setFunctions={setFunctions}
-            cost={cost}
-          />
-          <CostView data={mockData} state={state} cost={cost} />
-        </Grid>
-      </Container>
+      <MuiThemeProvider theme={theme}>
+        <Paper elevation={8}>
+          <h1 className="title">HVC</h1>
+        </Paper>
+        <Container>
+          <Grid container>
+            <MainView
+              data={mockData}
+              state={state}
+              setFunctions={setFunctions}
+              cost={cost}
+            />
+            <CostView data={mockData} state={state} cost={cost} />
+          </Grid>
+        </Container>
+      </MuiThemeProvider>
     </div>
   );
 };

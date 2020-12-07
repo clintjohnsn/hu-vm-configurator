@@ -70,14 +70,17 @@ const Summary: React.FC<Props> = ({ data, state, setFunctions, cost }) => {
 
   return (
     <div>
-      <Button
-        href={`data:${exportData}`}
-        download={"configuration.json"}
-        variant="contained"
-      >
-        Generate JSON
-      </Button>
       <div style={{ maxHeight: 480, overflow: "auto" }}>
+        <div className="exportButton">
+          <Button
+            color="primary"
+            href={`data:${exportData}`}
+            download={"configuration.json"}
+            variant="contained"
+          >
+            Generate JSON
+          </Button>
+        </div>
         {image ? (
           <div>
             <h2>Image</h2>
