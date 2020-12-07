@@ -46,7 +46,7 @@ describe("Testing our MainView component", () => {
       <MainView
         data={mockData}
         state={state}
-        setFunctions={setFunctions}
+        // setFunctions={setFunctions}
         cost={20}
       />
     );

@@ -118,7 +118,7 @@ const Summary: React.FC<Props> = ({
               EDIT
             </Button>
             <h2>Instance</h2>
-            <Card>
+            <Card elevation={7}>
               <CardContent>
                 <h3>{summaryData.instance.name}</h3>
                 <p>CPU - {summaryData.instance.cpuVariant}</p>
@@ -138,7 +138,7 @@ const Summary: React.FC<Props> = ({
               EDIT
             </Button>
             <h2>Bandwidth</h2>
-            <Card>
+            <Card elevation={7}>
               <CardContent>
                 <h3>{summaryData.bandwidth} /Month</h3>
               </CardContent>
