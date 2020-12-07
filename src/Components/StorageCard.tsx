@@ -1,5 +1,5 @@
 import { Paper } from '@material-ui/core';
-import React from 'react';
+import React, { useState } from 'react';
 import { MockDataType, setFunctionType, StateType } from '../Types';
 import { getIopsFromCapacity } from '../Utility';
 type Props = {
@@ -11,13 +11,12 @@ type Props = {
 }
 
 const StorageCard:React.FC<Props> =({data,state,setFunctions,volume,id})=>{
-
     const storage = volume === "Root"? state.storage.root: state.storage.ext.filter(s=>s.id === id)[0]
-
+    let [capacityField,setCapacityField] = useState(storage.capacity.toString());
     let renderStorageTypeList = data.storage.map(storageType=>{
         return <option value={storageType.id} key={storageType.id}>{storageType.name}</option>
-    }) 
-
+    }); 
+    let capacityRange = storage.typeId === 1?"20-512 GB":"40-2048 GB";
     return(
         <div>
             <Paper elevation={3}>
@@ -36,8 +35,10 @@ const StorageCard:React.FC<Props> =({data,state,setFunctions,volume,id})=>{
                     </div>
                     <div>
                         <h4>Capacity(GB)</h4>
-                        <input type="text" value={storage.capacity}
-                            onChange={(e)=>{
+                        <input type="text" value={capacityField}
+                            placeholder={capacityRange}
+                            onChange={(e)=>{setCapacityField(e.target.value)}}
+                            onBlur={(e)=>{
                                 setFunctions.setStorage(volume,{...storage,capacity:parseInt(e.target.value)});
                         }}/>
                     </div>

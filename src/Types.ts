@@ -68,3 +68,33 @@ export type setFunctionType = {
     setStorage:(volume:string, storage:SelectedStorageType)=>void,
 
 }
+
+export type SummaryType ={
+    region?:string|null,
+    image?:{
+        name?:string,
+        variant:string|null,
+    }
+    instance?:{
+        name?:string
+        memoryVariant?:string,
+        cpuVariant?:string,
+    },
+    bandwidth?:string,
+    storage?:{
+        root:{
+            type?:string,
+            capacity:number,
+            encryption:boolean,
+            backupRequired:boolean,
+            remarks:string,
+        },
+        ext:{
+            type?:string,
+            capacity:number,
+            encryption:boolean,
+            backupRequired:boolean,
+            remarks:string,
+        }[],
+    }
+}

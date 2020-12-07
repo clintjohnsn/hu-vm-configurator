@@ -4,7 +4,7 @@ import CostView from './Components/CostView'
 import { Container, Grid } from '@material-ui/core';
 import mockData from './MockData'
 import { InstanceType, SelectedInstanceType, SelectedStorageType, StateType } from './Types';
-import { calculateBandwidthCost } from './Utility';
+import { calculateBandwidthCost, getMemoryFormat } from './Utility';
 
 
 const MainContainer:React.FC = ()=>{
@@ -172,6 +172,52 @@ const MainContainer:React.FC = ()=>{
                     }
                 }
             });       
+        }
+        if(state.bandwidth){
+            if(state.bandwidth > 1024 && state.instance?.instanceId !== 3){
+                setState({...state,bandwidth:1024});
+                alert("Outbound network transfer range for this instance is 512 GB - 1 TB only");
+            }
+        }
+
+        if(state.storage.ext.length > 0){
+            state.storage.ext.forEach(storage=>{
+                let storageVariant = mockData.storage.filter(s=>s.id===storage.typeId)[0];
+                if (!(storage.capacity >= storageVariant.minCapacity && storage.capacity <= storageVariant.maxCapacity)){
+                    if(storage.capacity < storageVariant.minCapacity){
+                        let newExtList = [...state.storage.ext]
+                        newExtList = newExtList.map(s=>{
+                            if(s.id === storage.id) {
+                                return {...s,capacity:storageVariant.minCapacity}
+                            }
+                            return s;
+                        });
+                        setState({...state,storage:{...state.storage,ext:newExtList}});
+                    }else{
+                        let newExtList = [...state.storage.ext]
+                        newExtList = newExtList.map(s=>{
+                            if(s.id === storage.id) {
+                                return {...s,capacity:storageVariant.maxCapacity}
+                            }
+                            return s;
+                        });
+                        setState({...state,storage:{...state.storage,ext:newExtList}});
+                    }
+                    alert(`${getMemoryFormat(storage.capacity)} is not available for ${storageVariant.name}`);
+                }
+            });
+        }
+        if(state.storage.root){
+            let storage = state.storage.root;
+            let storageVariant = mockData.storage.filter(s=>s.id===storage.typeId)[0];
+            if (!(storage.capacity >= storageVariant.minCapacity && storage.capacity <= storageVariant.maxCapacity)){
+                if(storage.capacity < storageVariant.minCapacity){
+                    setState({...state,storage:{...state.storage,root:{...state.storage.root,capacity:storageVariant.minCapacity}}});
+                }else{
+                    setState({...state,storage:{...state.storage,root:{...state.storage.root,capacity:storageVariant.maxCapacity}}});
+                }
+                alert(`${getMemoryFormat(storage.capacity)} is not available for ${storageVariant.name}`);
+            }
         }
     }
 
